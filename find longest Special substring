@@ -1,0 +1,42 @@
+class Solution {
+    public int maximumLength(String s) {
+        int n = s.length();
+        int k = 1;
+        int j = 0;
+
+        while (k <= n) {
+            int cnt = 1;
+            if (j + k > n) {
+                return k - 1;
+            }
+            String tmp = s.substring(j, j + k);
+            boolean oke = true;
+
+            for (int i = 1; i < tmp.length(); i++) {
+                if (tmp.charAt(i) != tmp.charAt(i - 1)) {
+                    oke = false;
+                    break;
+                }
+            }
+
+            if (!oke) {
+                j++;
+                continue;
+            }
+
+            for (int i = j + 1; i < n; i++) {
+                if (i + k > n) break;
+                if (s.substring(i, i + k).equals(tmp)) cnt++;
+            }
+
+            if (cnt >= 3) {
+                k++;
+                j = 0;
+            } else {
+                if (j == n - k) return k - 1 == 0 ? -1 : k - 1;
+                else j++;
+            }
+        }
+        return -1;
+    }
+}
