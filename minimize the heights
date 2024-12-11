@@ -1,0 +1,28 @@
+class Solution {
+    public int getMinDiff(int[] arr, int k) {
+        if (arr == null || arr.length == 0) {
+            return 0;
+        }
+
+        Arrays.sort(arr); // Sorting the array
+        int n = arr.length;
+
+        // Initial difference between max and min
+        int diff = arr[n - 1] - arr[0];
+
+        for (int i = 1; i < n; i++) {
+            int max = Math.max(arr[i - 1] + k, arr[n - 1] - k);
+            int min = Math.min(arr[0] + k, arr[i] - k);
+
+            // Ensuring min is non-negative
+            if (min < 0) {
+                continue;
+            }
+
+            diff = Math.min(diff, max - min);
+        }
+
+        return diff;
+    }
+}
+// } Solution Class Ends
