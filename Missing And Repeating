@@ -1,0 +1,30 @@
+class Solution {
+    // Function to find two elements in array
+    ArrayList<Integer> findTwoElement(int arr[]) {
+        // code here
+        int repeating = 0, missing = 0;
+        
+        for (int i = 0; i < arr.length; i++) {
+            int current = Math.abs(arr[i]);
+            
+            if (arr[current - 1] < 0) {
+                repeating = current;
+            } else {
+                arr[current - 1] = -arr[current - 1];
+            }
+        }
+        
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] > 0) {
+                missing = i + 1;
+            }
+        }
+        
+        // return Arrays.asList(repeating, missing);
+        final ArrayList<Integer> ans = new ArrayList<>();
+        ans.add(repeating);
+        ans.add(missing);
+        
+        return ans;
+    }
+}
